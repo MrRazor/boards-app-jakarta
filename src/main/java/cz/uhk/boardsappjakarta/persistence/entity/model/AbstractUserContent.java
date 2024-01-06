@@ -23,9 +23,9 @@ public abstract class AbstractUserContent implements UserContent {
     @Column(insertable = false)
     private boolean removed;
 
-    @Column(insertable = false, updatable = false)
+    @Column(name="created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
-    @Column(insertable = false, updatable = false)
+    @Column(name="updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
 }

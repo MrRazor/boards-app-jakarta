@@ -19,7 +19,8 @@ public class User {
     @Column(insertable = false)
     private boolean enabled;
 
-    @OneToMany(mappedBy = "username", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Authority.class)
+    @JoinColumn(name="username")
     private List<Authority> authorities;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
