@@ -6,6 +6,9 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Path("/hello-world")
 public class HelloResource {
 
@@ -22,7 +25,9 @@ public class HelloResource {
     @GET
     @Path("/user")
     @Produces("application/json")
-    public String helloUser() {
-        return userDAO.findOne("admin").getUsername();
+    public Map<String, String> helloUser() {
+        Map<String, String> map = new HashMap<>();
+        map.put("username", userDAO.findOne("admin").getUsername());
+        return map;
     }
 }
