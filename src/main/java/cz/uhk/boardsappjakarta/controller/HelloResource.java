@@ -1,4 +1,4 @@
-package cz.uhk.boardsappjakarta;
+package cz.uhk.boardsappjakarta.controller;
 
 import cz.uhk.boardsappjakarta.persistence.dao.UserDAO;
 import jakarta.inject.Inject;
