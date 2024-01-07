@@ -51,7 +51,7 @@ public class CommentServiceImpl implements CommentService {
         }
         catch (Exception e) {
             e.printStackTrace();
-            throw new IllegalStateException("Failed to create comment for this post");
+            throw new IllegalStateException("Failed to create comment for this post - it is possible post is already deleted");
         }
     }
 
@@ -65,10 +65,13 @@ public class CommentServiceImpl implements CommentService {
             if (userService.getCurrentUsername().equals(username) && !post.isRemoved() && !comment.isRemoved()) {
                 comment.setContent(newCommentDTO.getContent());
             }
+            else {
+                throw new IllegalStateException("Post/comment is already deleted, or you are incorrect user");
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
-            throw new IllegalStateException("Failed to update comment");
+            throw new IllegalStateException("Failed to update comment - it is possible post/comment is already deleted, or you are incorrect user");
         }
     }
 
@@ -82,10 +85,13 @@ public class CommentServiceImpl implements CommentService {
             if ((userService.getCurrentUsername().equals(username) || userService.getCurrentRoles().contains("ROLE_ADMIN")) && !post.isRemoved() && !comment.isRemoved()) {
                 comment.setRemoved(true);
             }
+            else {
+                throw new IllegalStateException("Post/comment is already deleted, or you are not admin, or author is admin too");
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
-            throw new IllegalStateException("Failed to remove comment");
+            throw new IllegalStateException("Failed to remove comment - it is possible post/comment is already deleted, or you are not admin, or author is admin too");
         }
     }
 

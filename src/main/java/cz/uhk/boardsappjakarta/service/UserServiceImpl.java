@@ -11,8 +11,8 @@ import cz.uhk.boardsappjakarta.persistence.entity.User;
 import cz.uhk.boardsappjakarta.security.BCryptPasswordHash;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.security.enterprise.SecurityContext;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.SecurityContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -79,9 +79,12 @@ public class UserServiceImpl implements UserService {
                 if (user.isEnabled() && user.getAuthorities().stream().map(Authority::getAuthorityName).noneMatch(authorityName -> authorityName.equals("ROLE_ADMIN"))) {
                     user.setEnabled(false);
                 }
+                else {
+                    throw new IllegalStateException("User is already deleted / User is admin too");
+                }
             }
             catch (Exception e) {
-                throw new IllegalStateException("Failed to find user");
+                throw new IllegalStateException("Failed to find user / User is already deleted / User is admin too");
             }
         }
         else {
@@ -120,12 +123,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getCurrentUsername() {
-        return securityContext.getCallerPrincipal().getName();
+        return securityContext.getUserPrincipal().getName();
     }
 
     @Override
     public List<String> getCurrentRoles() {
-        return Arrays.stream(new String[]{"ROLE_ADMIN", "ROLE_USER"}).filter(role->securityContext.isCallerInRole(role)).toList();
+        return Arrays.stream(new String[]{"ROLE_ADMIN", "ROLE_USER"}).filter(role->securityContext.isUserInRole(role)).toList();
     }
 
     private boolean passwordMatches(String rawPassword, String encodedPassword) {

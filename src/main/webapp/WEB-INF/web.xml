@@ -7,14 +7,6 @@
 >
     <display-name>Board App Jakarta</display-name>
 
-    <servlet>
-        <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
-        <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>
-
     <login-config>
         <auth-method>BASIC</auth-method>
     </login-config>
@@ -28,19 +20,13 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected page 1</web-resource-name>
-            <url-pattern>/api/hello-world/hello</url-pattern>
+            <url-pattern>/api/**</url-pattern>
         </web-resource-collection>
+        <!--
         <auth-constraint>
             <role-name>ROLE_USER</role-name>
         </auth-constraint>
+        -->
     </security-constraint>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Protected page 2</web-resource-name>
-            <url-pattern>/api/hello-world/user</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>ROLE_ADMIN</role-name>
-        </auth-constraint>
-    </security-constraint>
+
 </web-app>

@@ -25,7 +25,7 @@ public abstract class AbstractJpaDAO< T, U > {
     }
 
     public List< T > findAll(){
-        return entityManager.createQuery( "from " + clazz.getName() )
+        return entityManager.createQuery( "select c from " + clazz.getName() + " c" )
                 .getResultList();
     }
 

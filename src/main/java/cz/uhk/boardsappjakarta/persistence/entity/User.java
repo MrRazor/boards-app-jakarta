@@ -19,7 +19,7 @@ public class User {
     @Column(insertable = false)
     private boolean enabled;
 
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Authority.class)
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Authority.class)
     @JoinColumn(name="username")
     private List<Authority> authorities;
 

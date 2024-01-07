@@ -39,6 +39,6 @@ public class PostDAO extends AbstractJpaDAO<Post,Long> {
 
     private TypedQuery<Post> getVisiblePostsSelectQuery() {
         return entityManager
-                .createQuery("from Posts where removed=false order by createdAt desc", Post.class);
+                .createQuery("select p from Posts p where p.removed=false order by p.createdAt desc", Post.class);
     }
 }
