@@ -19,14 +19,95 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Protected page 1</web-resource-name>
-            <url-pattern>/api/**</url-pattern>
+            <web-resource-name>user register</web-resource-name>
+            <url-pattern>/api/user/register</url-pattern>
         </web-resource-collection>
-        <!--
         <auth-constraint>
-            <role-name>ROLE_USER</role-name>
+            <role-name>**</role-name>
         </auth-constraint>
-        -->
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>user change-password</web-resource-name>
+            <url-pattern>/api/user/change-password</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>**</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>user disable-user</web-resource-name>
+            <url-pattern>/api/user/disable-user</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ROLE_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>user current-user</web-resource-name>
+            <url-pattern>/api/user/current-user</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>**</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>posts new</web-resource-name>
+            <url-pattern>/api/posts/new</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>**</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>posts update</web-resource-name>
+            <url-pattern>/api/posts/update/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>**</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>posts remove</web-resource-name>
+            <url-pattern>/api/posts/remove/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ROLE_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>comments new</web-resource-name>
+            <url-pattern>/api/comments/new/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>**</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>comments update</web-resource-name>
+            <url-pattern>/api/comments/update/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>**</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>comments remove</web-resource-name>
+            <url-pattern>/api/comments/remove/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ROLE_ADMIN</role-name>
+        </auth-constraint>
     </security-constraint>
 
 </web-app>
