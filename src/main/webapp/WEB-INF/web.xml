@@ -19,15 +19,6 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>user register</web-resource-name>
-            <url-pattern>/api/user/register</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>**</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <web-resource-collection>
             <web-resource-name>user change-password</web-resource-name>
             <url-pattern>/api/user/change-password</url-pattern>
         </web-resource-collection>
