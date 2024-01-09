@@ -2,8 +2,8 @@ package cz.uhk.boardsappjakarta.service;
 
 import cz.uhk.boardsappjakarta.dto.mapper.UserDTOMapper;
 import cz.uhk.boardsappjakarta.dto.user.ChangePasswordUserDTO;
+import cz.uhk.boardsappjakarta.dto.user.InformationUserDTO;
 import cz.uhk.boardsappjakarta.dto.user.LoginUserDTO;
-import cz.uhk.boardsappjakarta.dto.user.UserDTO;
 import cz.uhk.boardsappjakarta.persistence.dao.AuthorityDAO;
 import cz.uhk.boardsappjakarta.persistence.dao.UserDAO;
 import cz.uhk.boardsappjakarta.persistence.entity.Authority;
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO login(LoginUserDTO loginUserDTO) {
+    public InformationUserDTO login(LoginUserDTO loginUserDTO) {
         User user;
         try {
             user = userDAO.findOne(loginUserDTO.getUsername());
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getCurrentUser() {
+    public InformationUserDTO getCurrentUser() {
         try {
             return userDTOMapper.userToUserDTO(userDAO.findOne(getCurrentUsername()));
         }

@@ -30,9 +30,16 @@ public class CommentDAO extends AbstractJpaDAO<Comment,Long> {
                 .getResultList();
     }
 
+    @Override
+    public Comment findOne(Long id) {
+        return entityManager.createQuery("select c from Comments c join fetch c.author join fetch c.post where c.id=:idParam", Comment.class)
+                .setParameter("idParam", id)
+                .getSingleResult();
+    }
+
     private TypedQuery<Comment> getVisibleCommentsByPostIdSelectQuery(Long postId) {
         return entityManager
-                .createQuery("select c from Comments c where c.removed=false and c.post.id=:postIdParam and c.post.removed=false order by c.createdAt asc", Comment.class)
+                .createQuery("select c from Comments c join fetch c.author where c.post.id=:postIdParam and c.removed=false order by c.createdAt asc", Comment.class)
                 .setParameter("postIdParam", postId);
     }
 }

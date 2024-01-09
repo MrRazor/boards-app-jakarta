@@ -71,12 +71,12 @@ public class PostServiceImpl implements PostService {
                 post.setRemoved(true);
             }
             else {
-                throw new IllegalStateException("Post is already deleted, or you are not admin, or author is admin too");
+                throw new IllegalStateException("Post is already deleted, or you are not admin");
             }
         }
         catch (Exception e) {
             e.printStackTrace();
-            throw new IllegalStateException("Failed to remove post - it is possible post is already deleted, or you are not admin, or author is admin too");
+            throw new IllegalStateException("Failed to remove post - it is possible post is already deleted, or you are not admin");
         }
     }
 
@@ -84,7 +84,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO findPost(Long id) {
         try {
             PostDTO postDTO =  postDTOMapper.postToPostDTO(postDAO.findOne(id));
-            if (postDTO != null) {
+            if (postDTO != null && !postDTO.isRemoved()) {
                 return postDTO;
             }
             else {

@@ -86,19 +86,26 @@ public class CommentServiceImpl implements CommentService {
                 comment.setRemoved(true);
             }
             else {
-                throw new IllegalStateException("Post/comment is already deleted, or you are not admin, or author is admin too");
+                throw new IllegalStateException("Post/comment is already deleted, or you are not admin");
             }
         }
         catch (Exception e) {
             e.printStackTrace();
-            throw new IllegalStateException("Failed to remove comment - it is possible post/comment is already deleted, or you are not admin, or author is admin too");
+            throw new IllegalStateException("Failed to remove comment - it is possible post/comment is already deleted, or you are not admin");
         }
     }
 
     @Override
     public CommentDTO findComment(Long id) {
         try {
-            return commentDTOMapper.commentToCommentDTO(commentDAO.findOne(id));
+            Comment comment = commentDAO.findOne(id);
+            Post post = comment.getPost();
+            if(!comment.isRemoved() && !post.isRemoved()) {
+                return commentDTOMapper.commentToCommentDTO(comment);
+            }
+            else {
+                throw new IllegalStateException("Post, where is this comment, is already removed");
+            }
         }
         catch (Exception e) {
             e.printStackTrace();

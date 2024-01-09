@@ -31,14 +31,21 @@ public class PostDAO extends AbstractJpaDAO<Post,Long> {
     }
 
     public boolean existsById(Long id) {
-        Long countResult = (Long) entityManager.createQuery("select count(id) from Posts e where id=:id")
+        Long countResult = entityManager.createQuery("select count(id) from Posts p where id=:id and p.removed=false", Long.class)
                 .setParameter("id", id)
                 .getSingleResult();
         return !countResult.equals(0L);
     }
 
+    @Override
+    public Post findOne(Long id) {
+        return entityManager.createQuery("select p from Posts p join fetch p.author where p.id=:idParam", Post.class)
+                .setParameter("idParam", id)
+                .getSingleResult();
+    }
+
     private TypedQuery<Post> getVisiblePostsSelectQuery() {
         return entityManager
-                .createQuery("select p from Posts p where p.removed=false order by p.createdAt desc", Post.class);
+                .createQuery("select p from Posts p join fetch p.author where p.removed=false order by p.createdAt desc", Post.class);
     }
 }

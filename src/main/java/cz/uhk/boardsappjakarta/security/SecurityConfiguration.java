@@ -8,7 +8,7 @@ import jakarta.security.enterprise.identitystore.DatabaseIdentityStoreDefinition
 @BasicAuthenticationMechanismDefinition
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "java:jboss/datasources/BoardsDS",
-        callerQuery = "select password from users where username = ?",
+        callerQuery = "select password from users where username = ? and enabled=true",
         groupsQuery = "select authority from authorities where username = ?",
         hashAlgorithm = BCryptPasswordHash.class)
 @DeclareRoles({"ROLE_ADMIN", "ROLE_USER"})
