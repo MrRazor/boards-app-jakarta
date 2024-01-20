@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService {
             Authority authority = new Authority();
             authority.setAuthorityName("ROLE_USER");
             authority.setUsername(user.getUsername());
-            authorityDAO.create(authority);
             userDAO.create(user);
+            authorityDAO.create(authority);
         }
         catch (Exception e) {
             e.printStackTrace();
