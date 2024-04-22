@@ -15,4 +15,10 @@ public class UserDAO extends AbstractJpaDAO<User,String>{
         .setParameter("usernameParam", id)
         .getSingleResult();
     }
+
+    @Override
+    public void create(User user) {
+        entityManager.persist(user);
+        entityManager.flush();
+    }
 }
